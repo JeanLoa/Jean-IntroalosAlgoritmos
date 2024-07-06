@@ -1,0 +1,34 @@
+#include <iostream>
+
+using namespace std;
+
+void Tipo(char A) {
+	char Categoria;
+	float Precio;
+	cout << "Ingrese Categoria (P: Paseo, M: Montañera): ";
+	cin >> Categoria;
+	Categoria = toupper(Categoria);
+	(Categoria == 'P' || Categoria == 'M') ? (void)0 : (cout << "El dato no ha sido reconocido", exit(0));
+	Precio =
+	(A == 'B' && Categoria == 'P') ? 1300 :
+	(A == 'B' && Categoria == 'M') ? 1000 :
+	(A == 'M' && Categoria == 'P') ? 1350 :
+	(A == 'M' && Categoria == 'M') ? 2500 :
+	(A == 'O' && Categoria == 'P') ? 900 : 3200;
+	cout << "El monto a pagar: " << Precio;
+}
+
+void Bicicleta(char A) {
+	(A == 'B') ? Tipo('B') : (A == 'M') ? Tipo('M') : Tipo('O');
+}
+
+int main() {
+	char Modelo;
+	cout << "Ingrese la Marca (B: Best, M: Monark, O: Oxford): ";
+	cin >> Modelo;
+	Modelo = toupper(Modelo);
+	(Modelo == 'B' || Modelo == 'M' || Modelo == 'O') ? (void)0 : (cout << "El dato ingresado no ha sido reconocido", exit(0));
+	Bicicleta(Modelo);
+
+	return 0;
+}
