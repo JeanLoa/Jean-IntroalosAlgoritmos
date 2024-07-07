@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void Verificacion(string Texto) {
+	int Año = stoi(Texto.substr(0, 4));
+	(Año >= 2000 && Año <= 2024) ? (void)0 : (cout << "El codigo ingresado es incorrecto", exit(0));
+	int Mes = stoi(Texto.substr(4, 2));
+	(Mes >= 1 && Mes <= 12) ? (void)0 : (cout << "El codigo ingresado es incorrecto", exit(0));
+	int Modalidad_E_I = stoi(Texto.substr(6, 2));
+	char Modalidad = Modalidad_E_I;
+	Modalidad = toupper(Modalidad);
+	(Modalidad == 'E' || Modalidad == 'I') ? (void)0 : (cout << "El codigo ingresado es incorrecto", exit(0));
+	int Orientacion_C_H = stoi(Texto.substr(8, 2));
+	char Orientacion = Orientacion_C_H;
+	Orientacion = toupper(Orientacion);
+	(Orientacion == 'C' || Orientacion == 'H') ? (void)0 : (cout << "El codigo ingresado es incorrecto", exit(0));
+	int Beca = stoi(Texto.substr(10, 1));
+	(Beca == 1 || Beca == 0) ? (void)0 : (cout << "El codigo ingresado es incorrecto", exit(0));
+	cout << "\nAno: " << Año;
+	cout << "\nMes: " << Mes;
+	cout << "\nModalidad: " << (Modalidad == 'E') ? cout << "Examen de Admision" : cout << "Ingreso Directo";
+	cout << "\nOrientacion: " << (Orientacion == 'C') ? cout << "Ciencias" : cout << "Humanidades";
+	cout << "\nBecado: " << (Beca == 1) ? cout << "Si" : cout << "No";
+}
+
+int main() {
+	string Texto;
+	cout << "Ingrese el codigo: ";
+	cin >> Texto;
+	Verificacion(Texto);
+
+	return 0;
+}
