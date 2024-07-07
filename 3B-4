@@ -1,0 +1,56 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+struct Celular {
+	char* Marca;
+	int* Color;
+	int* Almacenamiento;
+	int* Precio;
+};
+
+int main() {
+	Celular Celular;
+	int Celulares;
+	cout << "Ingrese cuantos celulares desean comprar: ";
+	cin >> Celulares;
+	Celular.Marca = new char[Celulares];
+	Celular.Color = new int[Celulares];
+	Celular.Almacenamiento = new int[Celulares];
+	Celular.Precio = new int[Celulares];
+	double Precio = 0;
+
+	for (int i = 0; i < Celulares; ++i) {
+		cout << "Ingrese la marca del celular(N: Nokia, S: Samsung): ";
+		cin >> Celular.Marca[i];
+		cout << "Ingrese el color del celular(0: Rojo, 1: Blanco): ";
+		cin >> Celular.Color[i];
+		cout << "Ingrese el almacenamiento(8, 16): ";
+		cin >> Celular.Almacenamiento[i];
+		Celular.Precio[i] = (Celular.Marca[i] == 'N') ?
+							((Celular.Color[i] == 0) ? ((Celular.Almacenamiento[i] == 8) ? 1800 : 2650) : 2780) :
+							(Celular.Color[i] == 0) ? (Celular.Almacenamiento[i] == 8) ? 1700 : 2500 : 2900;
+	}
+
+	cout << "\nEl precio por cada celular es: \n";
+	cout << fixed << setprecision(2);
+	for (int i = 0; i < Celulares; ++i) {
+		cout << Celular.Precio[i] << " ";
+	}
+
+	for (int i = 0; i < Celulares; ++i) {
+		 Precio += Celular.Precio[i];
+	}
+
+	double PrecioT = Precio * ((Precio >= 2800) ? 0.94 : 1);
+
+	cout << "\nEl precio Total es: " << PrecioT;
+
+	delete[] Celular.Marca;
+	delete[] Celular.Color;
+	delete[] Celular.Almacenamiento;
+	delete[] Celular.Precio;
+
+	return 0;
+}
