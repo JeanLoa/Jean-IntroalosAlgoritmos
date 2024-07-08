@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int Obtener_Precio(long long codigo_de_barras) {
+	string Codigo = to_string(codigo_de_barras);
+	int Precio = stoi(Codigo.substr(Codigo.length() - 2));
+	(Precio / 100 >= 1) ? (cout << "El precio no ha sido identificado", exit(0)) : (void)0;
+	return Precio;
+}
+
+int Calcular_Monto_Pagar(int Cantidad_Comprada, int Precio) {
+	int MontoTotal = Cantidad_Comprada * Precio;
+	return MontoTotal;
+}
+
+int Calcular_Descuento(int Monto_Pagar) {
+	const int Descuento_Max = 0.80;
+	const int Descuento_Min = 0.90;
+	const int NoDesc = 1;
+	const int MaxLim = 1500;
+	const int MidLim = 1000;
+	int Descuento = (Monto_Pagar > MaxLim) ? Descuento_Max : (Monto_Pagar <= MaxLim && Monto_Pagar > MidLim) ? Descuento_Min : NoDesc;
+	return Descuento; 
+}
+
+void Imprimir_Resultados(long long codigo_de_barras, int precio, int monto_pagar, int cantidad_comprada, int descuento) {
+	string Codigo = to_string(codigo_de_barras);
+	int NumSerie = stoi(Codigo.substr(0, 5));
+	int Marca = stoi(Codigo.substr(5, 4));
+	cout << "\nEl codigo de barras: " << Codigo;
+	cout << "\nEl numero de serie es: " << NumSerie;
+	cout << "\nLa marca es: " << Marca;
+	cout << "\nEl precio unitario: " << precio;
+	cout << "\nLa cantidad de productos: " << cantidad_comprada;
+	cout << "\nEl descuento: " << 1 - descuento << "%";
+	cout << "\nEl monto total a pagar: " << monto_pagar;
+}
+
+int main() {
+	long long Codigo, Productos;
+	cout << "Ingrese el codigo de barras: ";
+	cin >> Codigo;
+	cout << "Ingrese la cantidad que desea comprar: ";
+	cin >> Productos;
+	int Monto = Obtener_Precio(Codigo);
+	int MontoTotal = Calcular_Monto_Pagar(Productos, Monto);
+	int Descuento = Calcular_Descuento(MontoTotal);
+	cout << "\nEl resultado es:\n";
+	Imprimir_Resultados(Codigo, Monto, MontoTotal, Productos, Descuento);
+
+	return 0;
+}
