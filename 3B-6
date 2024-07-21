@@ -1,0 +1,104 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void VerificacionDigitos(string& Codigo, int Primer, int Segundo, int Tercero, int Cuarto) {
+    // Convertir y almacenar los caracteres modificados
+    char Digitos[4];
+
+    // Modificar Primer
+    if (Primer >= 1 && Primer <= 3) {
+        Primer += 2;
+        Digitos[0] = '0' + Primer; // Convertir número a carácter
+    }
+    else if (Primer >= 4 && Primer <= 6) {
+        Digitos[0] = 'J';
+    }
+    else if (Primer >= 7 && Primer <= 9) {
+        Primer -= 4;
+        Digitos[0] = '0' + Primer; // Convertir número a carácter
+    }
+    else {
+        Digitos[0] = 'K';
+    }
+
+    // Modificar Segundo
+    if (Segundo >= 1 && Segundo <= 3) {
+        Digitos[1] = 'H';
+    }
+    else if (Segundo >= 4 && Segundo <= 6) {
+        Digitos[1] = 'P';
+    }
+    else if (Segundo >= 7 && Segundo <= 9) {
+        Segundo -= 1;
+        Digitos[1] = '0' + Segundo; // Convertir número a carácter
+    }
+    else {
+        Segundo -= 3;
+        Digitos[1] = '0' + Segundo; // Convertir número a carácter
+    }
+
+    // Modificar Tercero
+    if (Tercero >= 1 && Tercero <= 3) {
+        Digitos[2] = 'L';
+    }
+    else if (Tercero >= 4 && Tercero <= 6) {
+        Tercero -= 3;
+        Digitos[2] = '0' + Tercero; // Convertir número a carácter
+    }
+    else if (Tercero >= 7 && Tercero <= 9) {
+        Digitos[2] = 'G';
+    }
+    else {
+        Tercero += 7;
+        Digitos[2] = '0' + Tercero; // Convertir número a carácter
+    }
+
+    // Modificar Cuarto
+    if (Cuarto >= 1 && Cuarto <= 3) {
+        Cuarto -= 1;
+        Digitos[3] = '0' + Cuarto; // Convertir número a carácter
+    }
+    else if (Cuarto >= 4 && Cuarto <= 6) {
+        Cuarto += 2;
+        Digitos[3] = '0' + Cuarto; // Convertir número a carácter
+    }
+    else if (Cuarto >= 7 && Cuarto <= 9) {
+        Digitos[3] = 'I';
+    }
+    else {
+        Digitos[3] = 'F';
+    }
+
+    Codigo[12] = Digitos[0];
+    Codigo[13] = Digitos[1];
+    Codigo[14] = Digitos[2];
+    Codigo[15] = Digitos[3];
+
+    cout << Digitos[0] << " " << Digitos[1] << " " << Digitos[2] << " " << Digitos[3];
+
+    cout << "\nEl codigo modificado es: " << Codigo << endl;
+}
+
+int main() {
+    string Codigo;
+    int PrimerDigito, SegundoDigito, TercerDigito, CuartoDigito;
+
+    cout << "Ingresa el codigo: ";
+    cin >> Codigo;
+
+    if (Codigo.length() != 16) {
+        cout << "El codigo debe tener 16 caracteres." << endl;
+        return 1;
+    }
+
+    PrimerDigito = stoi(Codigo.substr(12, 1));
+    SegundoDigito = stoi(Codigo.substr(13, 1));
+    TercerDigito = stoi(Codigo.substr(14, 1));
+    CuartoDigito = stoi(Codigo.substr(15, 1));
+
+    VerificacionDigitos(Codigo, PrimerDigito, SegundoDigito, TercerDigito, CuartoDigito);
+
+    return 0;
+}
