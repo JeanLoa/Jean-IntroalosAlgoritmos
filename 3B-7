@@ -94,7 +94,7 @@ void MostrarDatos(Datos Vetas) {
         }
     }
 
-    cout << "\nCodigo Encriptado:";
+    cout << "Codigo Encriptado:";
     for (int i = 0; i < Info; ++i) {
         cout << " ";
         for (int j = Indice[i] - 1; j >= 0; --j) {
@@ -111,9 +111,10 @@ int main() {
         if (i >= 1) {
             cout << "Ingrese los valores apropiados\n";
         }
-        cout << "Ingresa la Latitud, Longitud, Altitud, Material, Dia, Mes y Ano: ";
+        cout << "Ingresa la Latitud, Longitud, Altitud, Material, Dia, Mes y Ano:\n";
         cin >> Vetas.Latitud >> Vetas.Longitud >> Vetas.Altitud >> Vetas.Material >> Vetas.Dia >> Vetas.Mes >> Vetas.Año;
         ++i;
+        system("cls");
     } while (!Verificacion(Vetas));
 
     MostrarDatos(Vetas);
