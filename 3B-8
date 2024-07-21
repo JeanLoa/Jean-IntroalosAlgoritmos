@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	string Codigo;
+	int Año;
+	int Mercaderia;
+	int MediodeVenta;
+	bool Validacion = false;
+	do {
+		Validacion = true;
+		system("cls");
+		cout << "Ingrese el codigo de barras (10 digitos): ";
+		cin >> Codigo;
+
+		Año = stoi(Codigo.substr(0, 4));
+		Mercaderia = stoi(Codigo.substr(4, 5));
+		MediodeVenta = stoi(Codigo.substr(9, 1));
+
+		if (Codigo.length() == 10) {
+			Validacion = true;
+		}
+		else {
+			Validacion = false;
+		}
+		if (Año >= 2000 && Año <= 2024) {
+			Validacion = true;
+		}
+		else {
+			Validacion = false;
+		}
+		if (MediodeVenta == 1 || MediodeVenta == 0) {
+			Validacion = true;
+		}
+		else {
+			Validacion = false;
+		}
+	} while (!Validacion);
+
+	string ConfirmacionMediodeVenta = (MediodeVenta == 1) ? "E-commerce" : "Otros canales";
+
+	cout << "\nEl ano : " << Año;
+	cout << "\nMercaderia: " << Mercaderia;
+	cout << "\nMedio de Venta: " << ConfirmacionMediodeVenta;
+
+	return 0;
+}
