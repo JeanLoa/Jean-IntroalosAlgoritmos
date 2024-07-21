@@ -1,0 +1,122 @@
+#include <iostream>
+
+using namespace std;
+
+struct Datos {
+    int Latitud;
+    int Longitud;
+    int Altitud;
+    int Material;
+    int Dia;
+    int Mes;
+    int Año;
+};
+
+bool Verificacion(Datos Vetas) {
+    return (Vetas.Latitud >= 1 && Vetas.Latitud <= 9 &&
+        Vetas.Longitud >= 1 && Vetas.Longitud <= 9 &&
+        Vetas.Altitud >= 1 && Vetas.Altitud <= 9 &&
+        Vetas.Material >= 1 && Vetas.Material <= 9 &&
+        Vetas.Dia >= 1 && Vetas.Dia <= 9 &&
+        Vetas.Mes >= 10 && Vetas.Mes <= 30 &&
+        Vetas.Año >= 10 && Vetas.Año <= 30);
+}
+
+void MostrarDatos(Datos Vetas) {
+    const int Info = 7;
+    const int MaxDigits = 70;
+    int Remanente[Info];
+    int Numero[Info][MaxDigits] = { 0 };
+    int Indice[Info] = { 0 };
+
+    bool Verificacion[Info] = { false };
+
+    while (!Verificacion[0]) {
+        Remanente[0] = Vetas.Latitud % 2;
+        Numero[0][Indice[0]++] = Remanente[0];
+        Vetas.Latitud /= 2;
+        if (Vetas.Latitud == 0) {
+            Verificacion[0] = true;
+        }
+    }
+
+    while (!Verificacion[1]) {
+        Remanente[1] = Vetas.Longitud % 4;
+        Numero[1][Indice[1]++] = Remanente[1];
+        Vetas.Longitud /= 4;
+        if (Vetas.Longitud == 0) {
+            Verificacion[1] = true;
+        }
+    }
+
+    while (!Verificacion[2]) {
+        Remanente[2] = Vetas.Altitud % 6;
+        Numero[2][Indice[2]++] = Remanente[2];
+        Vetas.Altitud /= 6;
+        if (Vetas.Altitud == 0) {
+            Verificacion[2] = true;
+        }
+    }
+
+    while (!Verificacion[3]) {
+        Remanente[3] = Vetas.Material % 2;
+        Numero[3][Indice[3]++] = Remanente[3];
+        Vetas.Material /= 2;
+        if (Vetas.Material == 0) {
+            Verificacion[3] = true;
+        }
+    }
+
+    while (!Verificacion[4]) {
+        Remanente[4] = Vetas.Dia % 2;
+        Numero[4][Indice[4]++] = Remanente[4];
+        Vetas.Dia /= 2;
+        if (Vetas.Dia == 0) {
+            Verificacion[4] = true;
+        }
+    }
+
+    while (!Verificacion[5]) {
+        Remanente[5] = Vetas.Mes % 8;
+        Numero[5][Indice[5]++] = Remanente[5];
+        Vetas.Mes /= 8;
+        if (Vetas.Mes == 0) {
+            Verificacion[5] = true;
+        }
+    }
+
+    while (!Verificacion[6]) {
+        Remanente[6] = Vetas.Año % 9;
+        Numero[6][Indice[6]++] = Remanente[6];
+        Vetas.Año /= 9;
+        if (Vetas.Año == 0) {
+            Verificacion[6] = true;
+        }
+    }
+
+    cout << "\nCodigo Encriptado:";
+    for (int i = 0; i < Info; ++i) {
+        cout << " ";
+        for (int j = Indice[i] - 1; j >= 0; --j) {
+            cout << Numero[i][j];
+        }
+    }
+    cout << endl;
+}
+
+int main() {
+    Datos Vetas;
+    int i = 0;
+    do {
+        if (i >= 1) {
+            cout << "Ingrese los valores apropiados\n";
+        }
+        cout << "Ingresa la Latitud, Longitud, Altitud, Material, Dia, Mes y Ano: ";
+        cin >> Vetas.Latitud >> Vetas.Longitud >> Vetas.Altitud >> Vetas.Material >> Vetas.Dia >> Vetas.Mes >> Vetas.Año;
+        ++i;
+    } while (!Verificacion(Vetas));
+
+    MostrarDatos(Vetas);
+
+    return 0;
+}
