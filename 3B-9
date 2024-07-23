@@ -1,0 +1,29 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+	char Modelo, Color, Juego;
+	do {
+		cout << "Ingrese el modelo (T o K): ";
+		cin >> Modelo;
+		cout << "Ingrese el color (Blanco, Azul, Negro): ";
+		cin >> Color;
+		cout << "Ingrese el juego (G, C, A): ";
+		cin >> Juego;
+		Modelo = toupper(Modelo);
+		Color = toupper(Color);
+		Juego = toupper(Juego);
+	} while (Modelo != 'T' && Modelo != 'K' &&
+			Color != 'B' && Color != 'A' && Color != 'N' &&
+			Juego != 'G' && Juego != 'C' && Juego != 'A');
+
+	double PrecioModelo = (Modelo == 'T' && Color == 'B') * 6 + (Modelo == 'T' && Color == 'A') * 7 + (Modelo == 'T' && Color == 'N') * 8 +
+					   (Modelo == 'K' && Color == 'B') * 10 + (Modelo == 'K' && Color == 'A') * 12 + (Modelo == 'K' && Color == 'N') * 15;
+	double PrecioTotal = (Juego == 'G') * 0.75 * PrecioModelo + (Juego == 'C') * 1 * PrecioModelo + (Juego == 'A') * 0.90 * PrecioModelo;
+	
+	cout << fixed << setprecision(2);
+	cout << "El precio total por el producto es: " << PrecioTotal;
+	return 0;
+}
